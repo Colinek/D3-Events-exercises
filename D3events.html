@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Tutorials/Exercises | D3 Tutorial</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    div {
+      height: 100px;
+      width: 100px;
+      background-color: steelblue;
+      margin: 5px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>D3js Events</h1>
+  <div>
+
+  </div>
+  <p>Box starts as steelblue</p>
+  <p>Mouse Over the box - changes colors orange. <br>
+    Mouse event is shown<br>
+    Mouse co-ordinates are shown</p>
+  <p>Mouse Out of the box - changes colour back to steelblue</p>
+  <p>Click in box - colour changes to lightgreen </p>
+
+  <h2></h2>
+  <p>(double-click on [Event] above - colour changes to green </p>
+
+  <h3></h3>
+  <p>(click on mouse co-ordinates to change colour)</p>
+  <script>
+    d3.selectAll("div")
+      .on("mouseover", function() {
+        d3.select(this)
+          .style("background-color", "orange");
+
+        // Get current event info
+        var eventText = d3.event;
+        d3.select("h2").text(eventText + ": Mouseover").style("color", "black")
+          .on("dblclick", function() {
+            d3.select(this)
+              .style("color", "green")
+          })
+
+        // Get x & y co-ordinates
+        var xAndy = d3.mouse(this);
+        d3.select("h3").text(xAndy).style("color", "black")
+          .on("click", function() {
+            d3.select(this)
+              .style("color", "red")
+          })
+      })
+      .on("mouseout", function() {
+        d3.select(this)
+          .style("background-color", "steelblue");
+        var eventText = d3.event;
+        d3.select("h2").text(eventText + ": Mouseout").style("color", "black")
+
+      })
+
+      .on("click", function() {
+        d3.select(this)
+          .style("background-color", "lightgreen")
+      });
+  </script>
+</body>
+
+</html>
